@@ -3,6 +3,7 @@ const colors = require("colors");
 const config = require("./config/config");
 const port = config.app.port;
 
+//connect app
 app.listen(port, () => {
   console.log(`The Tours is going on port ${port}`.yellow.bold);
 });
