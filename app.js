@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 require("./config/db");
-const userRoute = require("./src/v1/routes/user.route");
+const userRoute = require("./src/v1/routes/User.route");
+const blogRoute = require("./src/v1/routes/Blog.router");
 
 const app = express();
 
@@ -11,8 +12,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Routes
-app.use("/api/v1", userRoute);
+/**
+ * Routes for version one
+ */
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/blog", blogRoute);
 
 //Home route -> when server run
 app.get("/", (req, res) => {

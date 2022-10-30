@@ -55,7 +55,7 @@ exports.getUsers = async (req, res, next) => {
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: "can't get the tour",
+      message: "can't get the user",
       error: error.message,
     });
   }
