@@ -54,8 +54,8 @@ const blogSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minLength: [10, "date is too short"],
-    maxLength: [12, "date is too large"],
+    minLength: [20, "date is too short"],
+    maxLength: [23, "date is too large"],
   },
   status: {
     type: String,
