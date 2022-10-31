@@ -11,9 +11,6 @@ const {
 
 exports.getBlog = async (req, res) => {
   try {
-    console.log("blog ");
-    console.log("blog ", req.query);
-
     let filters = { ...req.query };
 
     //sort , page , limit -> exclude
@@ -71,12 +68,12 @@ exports.getBlog = async (req, res) => {
  */
 exports.createBlog = async (req, res) => {
   try {
-    console.log(req.body);
     const blog = await createProductService(req.body);
+    const id = blog._id;
     res.status(200).json({
       status: "success",
       message: "Add blog successfully",
-      data: blog,
+      id: id,
     });
   } catch (error) {
     res.status(400).json({
