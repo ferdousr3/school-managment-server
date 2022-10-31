@@ -71,6 +71,7 @@ exports.getBlog = async (req, res) => {
  */
 exports.createBlog = async (req, res) => {
   try {
+    console.log(req.body);
     const blog = await createProductService(req.body);
     res.status(200).json({
       status: "success",
