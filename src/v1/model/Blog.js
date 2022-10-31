@@ -32,14 +32,12 @@ const blogSchema = mongoose.Schema({
   category: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     minLength: [4, "Duration must be at least 4 characters."],
     maxLength: [10, "Duration is too large"],
   },
   source: {
     type: String,
-    required: true,
     unique: true,
     minLength: [4, "Duration must be at least 4 characters."],
     maxLength: [10, "Duration is too large"],
@@ -53,7 +51,7 @@ const blogSchema = mongoose.Schema({
   date: {
     type: String,
     required: true,
-    unique: true,
+   
     minLength: [10, "date is too short"],
     maxLength: [23, "date is too large"],
   },
