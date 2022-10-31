@@ -24,6 +24,7 @@ const blogSchema = mongoose.Schema({
   },
   slug: {
     type: String,
+    unique: true,
     required: true,
     minLength: [3, "slug is too short"],
     maxLength: [50, "slug is too large"],
@@ -31,6 +32,7 @@ const blogSchema = mongoose.Schema({
   category: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
     minLength: [4, "Duration must be at least 4 characters."],
     maxLength: [10, "Duration is too large"],
@@ -38,17 +40,20 @@ const blogSchema = mongoose.Schema({
   source: {
     type: String,
     required: true,
+    unique: true,
     minLength: [4, "Duration must be at least 4 characters."],
     maxLength: [10, "Duration is too large"],
   },
   image: {
     type: String,
+    unique: true,
     required: true,
     validate: [validator.isURL, "Please provide a valid URL"],
   },
   date: {
     type: String,
     required: true,
+    unique: true,
     minLength: [10, "date is too short"],
     maxLength: [12, "date is too large"],
   },
