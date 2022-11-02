@@ -1,11 +1,14 @@
 const {
-  createProductService,
   getBlogsService,
+  getBlogByIdService,
+  updateBlogByIdService,
+  createBlogService,
+  deleteBlogByIdService,
 } = require("../services/Blog.Services");
 
 /**
  * 1.get all blogs
- * 2. get single blogs
+ * 2. get blog with query parameter
  * 3. pagination
  */
 
@@ -37,7 +40,6 @@ exports.getBlog = async (req, res) => {
     if (req.query.fields) {
       const fields = req.query.fields.split(",").join(" ");
       queries.fields = fields;
-      console.log(fields);
     }
 
     if (req.query.page) {
@@ -61,6 +63,36 @@ exports.getBlog = async (req, res) => {
     });
   }
 };
+/**
+ * 1.get Single  blog by Id
+ */
+
+exports.getBlogById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const blog = await getBlogByIdService(id);
+
+    //* if blog not found with requested id
+
+    if (!blog) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Couldn't find a blog ",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: blog,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      status: "fail",
+      error: "Couldn't get the blog",
+    });
+  }
+};
 
 /**
  * add new blog
@@ -68,7 +100,7 @@ exports.getBlog = async (req, res) => {
  */
 exports.createBlog = async (req, res) => {
   try {
-    const blog = await createProductService(req.body);
+    const blog = await createBlogService(req.body);
     const id = blog._id;
     res.status(200).json({
       status: "success",
@@ -79,6 +111,69 @@ exports.createBlog = async (req, res) => {
     res.status(400).json({
       status: "fail",
       message: " Blog is not inserted ",
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * update blog by id
+ */
+
+exports.updateBlogById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await updateBlogByIdService(id, req.body);
+
+    //* if blog not not updated
+    if (!result.modifiedCount) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Couldn't update the Blog with this id",
+        result,
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully updated the Blog",
+      result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Couldn't update the Blog",
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * delete blog by id
+ */
+
+exports.deleteBlogById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await deleteBlogByIdService(id);
+    //* if don't delete any blog
+    if (!result.deletedCount) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Couldn't delete the Blog",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully deleted the Blog",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Couldn't delete the Blog",
       error: error.message,
     });
   }

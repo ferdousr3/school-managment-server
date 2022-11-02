@@ -7,9 +7,8 @@ const blogSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      index: true,
       required: [true, "please provide a blog Title"],
-      // unique: [true, "Title must be unique"],
+      unique: [true, "Title must be unique"],
       minLength: [10, "Title must be at least 10 characters."],
       maxLength: [50, "Title is too large"],
     },
@@ -26,7 +25,7 @@ const blogSchema = mongoose.Schema(
     },
     slug: {
       type: String,
-      // unique: [true, "Slug must be unique"],
+      unique: [true, "Slug must be unique"],
       required: true,
       minLength: [3, "slug is too short"],
       maxLength: [50, "slug is too large"],
@@ -63,7 +62,7 @@ const blogSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
