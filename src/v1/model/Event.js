@@ -9,6 +9,7 @@ const eventSchema = mongoose.Schema(
       trim: true,
       require: true,
       minLength: [3, 'Event name is too short'],
+      maxLength: [120, 'Event name is too short'],
     },
     date: {
       type: String,
@@ -24,6 +25,7 @@ const eventSchema = mongoose.Schema(
       trim: true,
       lowercase: true,
       minLength: [3, 'Organizer name is too short'],
+      maxLength: [120, 'Organizer name is too long'],
     },
     place: {
       type: String,
