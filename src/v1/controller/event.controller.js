@@ -80,6 +80,8 @@ exports.updateEvent = async (req, res) => {
     const { id } = req.params;
 
     const result = await updateEventService(id, data);
+    console.log(result);
+
     if (!result.modifiedCount) {
       return res.status(404).json({
         status: 'failed',

@@ -11,11 +11,11 @@ const eventSchema = mongoose.Schema(
       minLength: [3, 'Event name is too short'],
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
     time: {
-      type: Date,
+      type: String,
       required: true,
     },
     organizer: {
@@ -44,7 +44,7 @@ const eventSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
