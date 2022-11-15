@@ -1,9 +1,16 @@
-const Event = require('../model/Event');
+const Event = require("../model/Event");
 
 // get all events
-exports.getEventService = async () => {
-  const events = await Event.find({});
-  return events;
+exports.getEventService = async (filters, queries) => {
+  const events = await Event.find(filters)
+    .skip(queries.skip)
+    .limit(queries.limit)
+    .select(queries.fields)
+    .sort(queries.sortBy);
+
+  const total = await Event.countDocuments(filters);
+  const page = Math.ceil(total / queries.limit);
+  return { total, page, events };
 };
 
 // get event by Id
