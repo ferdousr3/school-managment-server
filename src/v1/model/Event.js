@@ -37,7 +37,7 @@ const eventSchema = mongoose.Schema(
       type: String,
       required: true,
       enum: {
-        values: ['open', 'closed'],
+        values: ['open','running', 'closed'],
         error: "{VALUE} can't be a status",
       },
       default: 'open',

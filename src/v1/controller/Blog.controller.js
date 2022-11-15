@@ -7,7 +7,7 @@ const {
 } = require("../services/Blog.Services");
 
 /**
- * 1.get all blogs
+ * 1. get all blogs
  * 2. get blog with query parameter
  * 3. pagination
  */
@@ -34,7 +34,6 @@ exports.getBlog = async (req, res) => {
     if (req.query.sort) {
       const sortBy = req.query.sort.split(",").join(" ");
       queries.sortBy = sortBy;
-      console.log(sortBy);
     }
 
     if (req.query.fields) {
